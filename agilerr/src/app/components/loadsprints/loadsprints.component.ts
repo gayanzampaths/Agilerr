@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashService } from '../../services/dash.service';
 import { Router } from '@angular/router';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-loadsprints',

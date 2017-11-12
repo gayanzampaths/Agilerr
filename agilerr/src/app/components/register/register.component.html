@@ -1,8 +1,56 @@
-<div class="well" style="width:400px; margin:0 auto; height: 500px; overflow-y: auto;">
-  <h2 class="page-header">Register</h2>
-  <form (submit)="onRegisterSubmit()">
-    <div class="form-group">
-      <label>Name</label>
+<div style="background-image: url('../../../assets/images/reg-back.jpg');">
+    <div class="col s6" style="padding-left: 40px">
+        <h1 style="margin-top: 0;">AGILERR</h1>
+        <h4>Sign Up with your correct informations.</h4>
+        <br>
+        <div class="row">
+          <form class="" (submit)="onRegisterSubmit()">
+              <div class="row col s6">
+                <div class="progress">
+                  <div class="indeterminate"></div>
+                </div>
+                <br>
+                <div class="input-field">
+                    <input style="color:white;font-size: 20px;" id="name" type="text" class="validate in" [(ngModel)]="name" name="name">
+                    <label style="color:white;font-size: 20px;" for="name">Enter Your Name</label>
+                </div>
+                <div class="input-field">
+                    <input style="color:white;font-size: 20px;" id="username" type="text" class="validate in" [(ngModel)]="username" name="username">
+                    <label style="color:white;font-size: 20px;" for="username">Enter Username For Your Account</label>
+                </div>
+                <div class="input-field">
+                    <input style="color:white;font-size: 20px;" id="email" type="email" class="validate in" [(ngModel)]="email" name="email">
+                    <label style="color:white;font-size: 20px;" for="email">Enter Your E-Mail</label>
+                </div>
+                <div class="input-field">
+                    <input style="color:white;font-size: 20px;" id="name" type="password" class="validate in" [(ngModel)]="password" name="password">
+                    <label style="color:white;font-size: 20px;" for="name">Create Password For Your Account</label>
+                </div>
+                <label>Select Your Role</label>
+                <select class="browser-default in transparent" [(ngModel)]="type" name="type">
+                  <option value="master">I am a scrum master</option>
+                  <option value="member">I am a surm member</option>
+                </select>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Submit">
+              </div>
+          </form>
+          <div class="col s6 center">
+            <h3 style="color:white"><strong>Hurry Up!</strong></h3>
+            <h4 style="color:white">Join with your scrum team!</h4>
+            <img src="../../../assets/images/meeting.png" style="max-width: 70%">
+            </div>
+        </div>
+      </div>
+      
+      <div class="center" style="margin: 0">
+        <p style="margin: 0; padding-bottom: 5px">When creating a new account, you agree to our 
+            terms of service and privacy policy.</p>
+      </div>
+</div>
+
+
+<!--
       <input type="text" [(ngModel)]="name" class="form-control" name="name">
     </div>
     <div class="form-group">
@@ -25,3 +73,4 @@
   </form>
 
 </div>
+-->

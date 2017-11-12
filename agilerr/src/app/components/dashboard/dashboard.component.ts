@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  //Save project as current project when a project clicked
+  // Save project as current project when a project clicked
   projectClicked(item) {
     this.dashService.setCurrentProject(item);
     this.dashService.projectChanged.emit(this.dashService.getProjectId());

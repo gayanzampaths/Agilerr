@@ -25,6 +25,11 @@ import { LoadsprintsComponent } from './components/loadsprints/loadsprints.compo
 import { ViewsprintComponent } from './components/viewsprint/viewsprint.component';
 import { ChatComponent } from './components/chat/chat.component';
 
+import { MaterializeModule } from 'angular2-materialize';
+import { StickyNavModule } from 'ng2-sticky-nav';
+import { ToTopComponent } from './components/to-top/to-top.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -78,8 +83,12 @@ const appRoutes: Routes = [
     path: 'chat',
     canActivate: [AuthGuard],
     component: ChatComponent
+  },
+  {
+    path: 'privacy',
+    component: PrivacyComponent
   }
-]
+];
 
 @NgModule({
   declarations: [
@@ -96,14 +105,18 @@ const appRoutes: Routes = [
     CreatesprintComponent,
     LoadsprintsComponent,
     ViewsprintComponent,
-    ChatComponent
+    ChatComponent,
+    ToTopComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
     FlashMessagesModule,
-    HttpModule
+    HttpModule,
+    MaterializeModule,
+    StickyNavModule
   ],
   providers: [ValidateService, AuthService, AuthGuard, DashService],
   bootstrap: [AppComponent]

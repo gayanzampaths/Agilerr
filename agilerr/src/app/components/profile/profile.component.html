@@ -1,7 +1,31 @@
-<div *ngIf="user" >
+<div *ngIf="user" style="background-image: url('../../../assets/images/prof-back.jpg'); margin: o; margin-bottom: 0; padding-bottom: 15px" class="row">
+  <div class="col s4">
+    <img src="../../../assets/images/profile.gif" style="max-width: 100%" class="right">
+  </div>
+  <div class="col s8">
+    <h2 class="page-header">{{user.name}}</h2>
+    <label style="color:white"><h4>Your User Name :</h4></label>
+    <div class="input-field">
+      <input style="color:white;font-size: 20px;" disabled value={{user.username}}>
+    </div>
+    <label style="color:white"><h4>Your E-Mail :</h4></label>
+    <div class="input-field">
+      <input style="color:white;font-size: 20px;" disabled value={{user.email}}>
+    </div>
+  </div>
+  <div class="col s12 right-align" *ngIf="authService.isLoggedIn()" style="padding-right: 100px">
+    <h5>Visit Your Projects.</h5>
+    <button class="btn waves-effect waves-light lime accent-3 btn-large cyan pulse" routerLink="dashboard">Go to Dashboard
+        <i class="material-icons right">send</i>
+    </button>
+    <h6>Manage Them.</h6>
+  </div>
+</div>
+
+<!--<div *ngIf="user" >
   <h2 class="page-header">{{user.name}}</h2>
   <ul class="list-group">
     <li class="list-group-item">Username: {{user.username}}</li>
     <li class="list-group-item">Email: {{user.email}}</li>
   </ul>
-</div>
+</div>-->
