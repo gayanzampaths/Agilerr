@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
 const Project = require('../models/projects');
-const Sprint = require('../models/sprint')
+const Sprint = require('../models/sprint');
+const Issue = require('../models/issue');
+
 
 // Add Project
 router.post('/createproject', passport.authenticate('jwt', {session: false}), function(req, res) {
@@ -13,6 +15,7 @@ router.post('/createproject', passport.authenticate('jwt', {session: false}), fu
         projectName: req.body.projectName,
         owner: req.body.owner,
         members: req.body.members,
+        projectDesc: req.body.projectDesc,
         ids: req.body.ids,
         description: req.body.description,
         time: req.body.time
@@ -117,6 +120,125 @@ router.get('/getsprint', passport.authenticate('jwt', {session: false}), functio
 
     });
 
+});
+
+// Edit a Sprint
+router.post('/editsprint', passport.authenticate('jwt', {session: false}), function(req, res) {
+    updateSprint = {};
+    updateSprint['sprintId'] = req.body.sprintId;
+    updateSprint['ids'] = req.body.ids;
+    updateSprint['userStories'] = req.body.userStories;
+    updateSprint['name'] = req.body.name;
+
+    console.log(updateSprint);
+
+    Sprint.updateSprint(updateSprint, function (err, sprint) {
+        if (err) {
+            res.json({success: false, msg: 'Failed to update sprint!'});
+            console.log(err);
+        } else {
+            res.json({success: true, msg: 'Sprint updated successfully!'})
+        }
+    });
+});
+
+// Mark Sprint as Finished
+router.get('/finishSprint', passport.authenticate('jwt', {session: false}), function (req, res) {
+    Sprint.markAsFinish(req.query.sprintId, function (err, sprint) {
+        if (err) {
+            res.json({success: false, msg: 'Failed to mark as finished :('});
+        } else {
+            res.json({success: true, msg: 'Sprint marked as finished :)'});
+        }
+    });
+});
+
+//Submit a new Issue
+router.post('/submitIssue', passport.authenticate('jwt', {session: false}), function (req, res) {
+    newIssue = new Issue({
+        issueType: req.body.type,
+        priority: req.body.priority,
+        description: req.body.description,
+        username: req.body.username,
+        projectId: req.body.projectId,
+        date: req.body.date
+
+    });
+
+    Issue.addIssue(newIssue, function (err, issue) {
+        if (err) {
+            console.log(err);
+            res.json({success: false, msg: 'Failed to submit Issue!'});
+        } else {
+            res.json({success: true, msg: 'Issue Submitted Successfully!'});
+        }
+    });
+});
+
+// Get issues
+router.get('/getIssues', passport.authenticate('jwt', {session: false}), function (req, res) {
+
+    Issue.getIssues(req.query.projectId, function (err, issues) {
+        if (err) throw err;
+
+        if (!issues) {
+            return res.json({success: false, msg: 'No Issues Found!'});
+        }
+
+        res.json({success: true, issues: issues});
+    });
+
+});
+
+// Get issues
+router.get('/getProject', passport.authenticate('jwt', {session: false}), function (req, res) {
+
+    Project.getProject(req.query.projectId, function (err, project) {
+        if (err) throw err;
+
+        if (!project) {
+            return res.json({success: false, msg: 'No Issues Found!'});
+        }
+
+        res.json({success: true, project: project});
+    });
+
+});
+
+// Get projectCount
+router.get('/getProjectCount', function (req, res) {
+
+    Project.getProjectCount(function (err, count) {
+
+        if (err) throw err;
+
+        return res.json(count);
+    });
+});
+
+// Add Project
+router.post('/updateproject', passport.authenticate('jwt', {session: false}), function(req, res) {
+    const project = {};
+
+    project['id'] = req.body.id;
+    project['members'] = req.body.members;
+    project['projectName'] = req.body.projectName;
+    project['members'] = req.body.members;
+    project['projectDesc'] = req.body.projectDesc;
+    project['ids'] = req.body.ids;
+    project['description'] = req.body.description;
+    project['time'] = req.body.time;
+
+    console.log(project);
+
+    Project.updateProject(project, function (err, project) {
+
+        if (err) {
+            res.json({success: false, msg: 'Failed to update project'});
+        } else {
+            res.json({success: true, msg: 'Project updated'})
+        }
+    })
 });
 
 

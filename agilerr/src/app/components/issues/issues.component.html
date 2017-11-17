@@ -1,0 +1,47 @@
+<div class="red lighten-5" style="padding-bottom: 100px">
+  <div class="container" style="width: 60%; margin: 0 auto;">
+    <h2 style="margin-top: 0; padding: 5px">Issues of {{ projectName }}</h2>
+    <div style="float: right;">
+      <button class="btn btn-default" routerLink="/sprints"><< Sprints</button>
+    </div>
+    <br>
+    <br>
+    <div *ngFor="let issue of issues; let i = index">
+  
+      <div class="">
+        <div [ngClass]="(issue.issueType=='error')?'card-panel red lighten-1':'card-panel green lighten-1'" style="margin-bottom: 0">
+          <div class="panel-heading">
+            <span>{{ issue.issueType }}</span>
+            <span style="float: right;">#{{ i+1 }}</span>
+          </div>
+          </div>
+          <div class="card-panel white" style="margin: 0;">
+          <div class="" >
+  
+            <b>{{ issue.description }}</b>
+            <hr>
+            <span>{{ issue.username }}</span>
+            <span style="float: right;">{{ issue.date }}</span>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>
+
+  <div class="fixed-action-btn" style="margin-right: 160px">
+    <a class="btn-floating btn-large blue btn"  routerLink="/submitIssue">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+  <app-chatwrap></app-chatwrap>
+  
+  <!--<div id="container-floating">
+    <div id="floating-button" data-toggle="tooltip" data-placement="left" data-original-title="Create" >
+      <p class="plus">+</p>
+      <img class="edit" src="http://localhost:3000/images/create.png">
+    </div>-->
+  
+  </div>

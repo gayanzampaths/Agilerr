@@ -29,6 +29,16 @@ import { MaterializeModule } from 'angular2-materialize';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { ToTopComponent } from './components/to-top/to-top.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
+import { ChatwrapComponent } from './components/chatwrap/chatwrap.component';
+import { IssuesComponent } from './components/issues/issues.component';
+import { SubmitissueComponent } from './components/submitissue/submitissue.component';
+import { EditsprintComponent } from './components/editsprint/editsprint.component';
+import { from } from 'rxjs/observable/from';
+import { ContactComponent } from './components/contact/contact.component';
+import { ViewbacklogComponent } from './components/viewbacklog/viewbacklog.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
+import { AboutComponent } from './components/about/about.component';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
 
 const appRoutes: Routes = [
   {
@@ -61,6 +71,17 @@ const appRoutes: Routes = [
       {
         path: 'viewSprint',
         component: ViewsprintComponent
+      },
+      {
+        path: 'issues',
+        canActivate: [AuthGuard],
+        component: IssuesComponent,
+        children: [
+        {
+          path: 'submitIssue',
+          canActivate: [AuthGuard],
+          component: SubmitissueComponent }
+        ]
       }
     ]
   },
@@ -68,6 +89,21 @@ const appRoutes: Routes = [
     path: 'createSprint',
     canActivate: [AuthGuard],
     component: CreatesprintComponent
+  },
+  {
+    path: 'sprints',
+    canActivate: [AuthGuard],
+    component: LoadsprintsComponent
+  },
+  {
+    path: 'submitIssue',
+    canActivate: [AuthGuard],
+    component: SubmitissueComponent
+  },
+  {
+    path: 'issues',
+    canActivate: [AuthGuard],
+    component: IssuesComponent
   },
   {
     path: 'createProject',
@@ -80,6 +116,11 @@ const appRoutes: Routes = [
     component: ViewsprintComponent
   },
   {
+    path: 'editSprint',
+    canActivate: [AuthGuard],
+    component: EditsprintComponent
+  },
+  {
     path: 'chat',
     canActivate: [AuthGuard],
     component: ChatComponent
@@ -87,6 +128,29 @@ const appRoutes: Routes = [
   {
     path: 'privacy',
     component: PrivacyComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
+  },
+  {
+    path: 'viewBacklog',
+    canActivate: [AuthGuard],
+    component: ViewbacklogComponent
+  },
+  {
+    path: 'timeline',
+    canActivate: [AuthGuard],
+    component: TimelineComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
+  {
+    path: 'editProject',
+    canActivate: [AuthGuard],
+    component: EditProjectComponent
   }
 ];
 
@@ -107,7 +171,16 @@ const appRoutes: Routes = [
     ViewsprintComponent,
     ChatComponent,
     ToTopComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    ChatwrapComponent,
+    IssuesComponent,
+    SubmitissueComponent,
+    EditsprintComponent,
+    ContactComponent,
+    ViewbacklogComponent,
+    TimelineComponent,
+    AboutComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,

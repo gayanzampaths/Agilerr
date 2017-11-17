@@ -19,6 +19,16 @@ export class RegisterComponent implements OnInit {
   password: String;
   type: String;
 
+  isUsernameAvailable: boolean = null;
+  // shows the availability span in username
+  showUsernameSpan: boolean = false;
+  showEmailSpan: boolean = false;
+  showEmailNotValidSpan: boolean = false;
+
+  isEmailAvailable: boolean = null;
+  isEmailValid: boolean = null;
+  submitDisable = true;
+
   constructor(
     private validateService: ValidateService,
     private flashMessage: FlashMessagesService,
@@ -64,5 +74,30 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['/register']);
       }
     });
+  }
+
+  checkUsername() {
+    this.showUsernameSpan = true;
+    this.authService.checkUser(this.username).subscribe(data => {
+      this.isUsernameAvailable = !data.success;
+    });
+  }
+
+  checkEmail() {
+    if (this.validateService.validateEmail(this.email)) {
+      this.isEmailValid = true;
+      // console.log('EmailValid: ' + this.isEmailValid);
+      this.showEmailSpan = true;
+      this.showEmailNotValidSpan = false;
+      this.authService.checkEmail(this.email).subscribe(data => {
+        this.isEmailAvailable = !data.success;
+        // console.log('EmailAvailable: ' + this.isEmailAvailable);
+      });
+    } else {
+      this.showEmailSpan = false;
+      this.showEmailNotValidSpan = true;
+      this.isEmailValid = false;
+      // console.log('EmailValid: ' + this.isEmailValid);
+    }
   }
 }
