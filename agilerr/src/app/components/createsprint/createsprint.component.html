@@ -3,14 +3,29 @@
   <h3 style="margin-top: 0;padding-top: 5px">Create a New Sprint for {{ projectName }}</h3>
   <br>
   <br>
-  <div class="input-field col s4">
+<div class="input-field col s4">
   <input id="sn" name="name" [(ngModel)]="sprintName" type="text" class="form-control" style="">
   <label for="sn">Enter a Title  for Your Sprint</label>
+</div>
+<div>
+  <h5>Goes under: </h5>
+
+  <select id="s" class="browser-default in transparent" name="type" [(ngModel)]="backlogItem">
+    <option style="background-color: rgb(31, 37, 35)" value="master" *ngFor="let description of backlogDesriptions" value="{{ description }}">{{ description }}</option>
+  </select>
+
+  <!-- Dropdown Trigger -->
+  <!--<a class='dropdown-button btn' data-activates='dropdown1'>{{ backlogItem }}</a>-->
+  <!-- Dropdown Structure -->
+  <!--<ul id='dropdown1' class='dropdown-content'>
+    <li *ngFor="let description of backlogDesriptions"><a (click)="setBacklogItem(description)">{{ description }}</a></li>
+  </ul>-->
+
 </div>
   <table class="table">
     <thead>
     <tr>
-      <th style="width: 25%">Backlog Id</th>
+      <th style="width: 25%">Sprint Id</th>
       <th>User Stories</th>
     </tr>
     </thead>

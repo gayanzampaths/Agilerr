@@ -9,8 +9,7 @@
           <ul>
             <li *ngIf="authService.isLoggedIn()"><a class="grey-text text-lighten-3" [routerLink]="['/dashboard']">Dashboard</a></li>
             <li *ngIf="authService.isLoggedIn()"><a class="grey-text text-lighten-3" [routerLink]="['/profile']">Profile</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Conract US</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">About Us</a></li>
+            <li><a class="grey-text text-lighten-3" href="/about">About Us</a></li>
           </ul>
         </div>
       </div>

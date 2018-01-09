@@ -34,7 +34,7 @@
         <td>
           <div style="width: 300px; height: 200px; background-color: transparent;">
             <div *ngFor="let member of membersArray; let i = index" >
-              <div *ngIf="member!=''" style="background-color: #d9edf7;">
+              <div *ngIf="member!=''" style="background-color: #73a9c4;height: 50px; padding: 5px;">
                 <img style="width: 30px; height: 30px; border-radius: 50%" class="user-photo" src="http://localhost:3000/images/profile/{{ member }}" onerror="this.src='http://localhost:3000/images/profile/default.gif';">
                 {{ member }}
                 <a (click)="removeMember(member, i)"><button class="btn" style="float: right;">remove</button></a>
@@ -51,7 +51,7 @@
   
     <input class="form-control" [(ngModel)]="desc" placeholder="Project Description" (click)="hide(cs)"/>
   
-    <h4>Create Product Backlog</h4>
+    <h4>Update Product Backlog</h4>
   
     <table class="table">
       <thead>
@@ -74,7 +74,7 @@
   
   
     <button (click)="onUpdateSubmit()" class="btn btn-success" style="float: right">Update Project</button>
-    <button routerLink="/dashboard" class="btn btn-info" style="float: right">Cancel</button>
+    <button routerLink="/dashboard" class="btn btn-info" style="float: right; margin-right: 10px;">Cancel</button>
   </div>
 </div>
 

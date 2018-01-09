@@ -74,3 +74,9 @@ module.exports.updateProject = function (project, callback) {
 
     Project.update(condition, options, {multi: false}, callback);
 }
+
+module.exports.getProject = function (id, callback) {
+    var objId = new ObjectId(id);
+    const query = {_id: objId};
+    Project.find(query, callback);
+}

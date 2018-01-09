@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   isMaster: boolean;
   isAvailable: boolean= false;
 
-  classes = ['light-green accent-2', 'red accent-2', 'blue lighten-2', 'orange lighten-2' , 'red lighten-2' , 'pink lighten-2' , 'purple lighten-2' , 'deep-purple lighten-2' , 'indigo lighten-2' , 'lime lighten-2' , 'brown lighten-2'];
+  classes = ['light-green accent-2', 'blue lighten-2', 'orange lighten-2' , 'purple lighten-2' ];
 
   constructor(
     private dashService: DashService,
@@ -25,8 +25,10 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {
     this.dashService.loadProjects().subscribe(projects => {
+      console.log(projects.length);
       // this.projects = projects;
-      if (projects) {
+      if (projects.length > 0) {
+        console.log('This is not equal zero!');
         this.projects = projects;
         this.isAvailable = true;
       } else {
@@ -34,13 +36,15 @@ export class DashboardComponent implements OnInit {
       }
 
       if (isNullOrUndefined(localStorage.getItem('currentProject'))) {
-        console.log(this.projects[0]);
+        // console.log(this.projects[0]);
       }
     }, err => {
       console.log(err);
     });
 
     this.isMaster = this.authService.isMaster();
+
+    console.log(this.isAvailable);
   }
 
   ngOnInit() {
@@ -56,7 +60,8 @@ export class DashboardComponent implements OnInit {
 
   // Get Random classes
   getRandomClasses() {
-    const x = Math.floor((Math.random() * 11) + 0);
+    const x = Math.floor((Math.random() * 4) + 0);
+    setTimeout(1000);
     return this.classes[x];
   }
 }

@@ -9,7 +9,7 @@
     <div *ngFor="let issue of issues; let i = index">
   
       <div class="">
-        <div [ngClass]="(issue.issueType=='error')?'card-panel red lighten-1':'card-panel green lighten-1'" style="margin-bottom: 0">
+        <div [ngClass]="(issue.issueType==='Error')?'card-panel red':'card-panel green'" style="margin-bottom: 0">
           <div class="panel-heading">
             <span>{{ issue.issueType }}</span>
             <span style="float: right;">#{{ i+1 }}</span>
@@ -19,6 +19,10 @@
           <div class="" >
   
             <b>{{ issue.description }}</b>
+            <span style="float: right">
+              <button *ngIf="issue.fixed" class="btn btn-success">Fixed</button>
+              <button *ngIf="!issue.fixed" class="btn btn-success" style="border-radius: 50px;" (click)="setAsFixed(issue._id)">&#10003;</button> 
+            </span>
             <hr>
             <span>{{ issue.username }}</span>
             <span style="float: right;">{{ issue.date }}</span>
@@ -28,6 +32,16 @@
   
     </div>
   
+  </div>
+
+  <div class="row" *ngIf="!isIssueZero">
+    <div class="col s4">
+        <img src="../../../assets/images/issue.gif">
+    </div>
+    <div class="col s4">
+      <br><br><br>
+        <h2>Still No Issue! <br><br> We Doing Well!</h2>
+    </div>
   </div>
 
   <div class="fixed-action-btn" style="margin-right: 160px">

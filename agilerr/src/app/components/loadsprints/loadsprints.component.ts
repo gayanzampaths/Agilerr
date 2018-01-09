@@ -20,6 +20,8 @@ export class LoadsprintsComponent implements OnInit {
 
   isLastFinished: boolean = false;
 
+  isSprintsEmpty: boolean = true;
+
   constructor(
     private dashService: DashService,
     private router: Router,
@@ -37,6 +39,10 @@ export class LoadsprintsComponent implements OnInit {
     console.log(this.projectName);
 
     this.dashService.loadSprints(this.dashService.getProjectId()).subscribe(sprints => {
+
+      if(sprints.length > 0){
+        this.isSprintsEmpty = false;
+      }
 
       if (sprints) {
         this.sprints = sprints;
