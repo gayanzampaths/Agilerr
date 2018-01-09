@@ -1,25 +1,23 @@
-<footer class="page-footer blue-grey darken-4">
-    <div class="container">
+<footer class="page-footer blue-grey darken-4" style="">
+    <div class="">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">Footer Content</h5>
-          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+          <h3 class="white-text">AGILERR</h3>
+          <h4 class="grey-text text-lighten-4"><strong>Agile Project Management Platform.</strong></h4>
         </div>
         <div class="col l4 offset-l2 s12">
-          <h5 class="white-text">Links</h5>
           <ul>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+            <li *ngIf="authService.isLoggedIn()"><a class="grey-text text-lighten-3" [routerLink]="['/dashboard']">Dashboard</a></li>
+            <li *ngIf="authService.isLoggedIn()"><a class="grey-text text-lighten-3" [routerLink]="['/profile']">Profile</a></li>
+            <li><a class="grey-text text-lighten-3" href="/about">About Us</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
-      <div class="container">
-      © 2014 Copyright Text
-      <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+      <div class="container center">
+        Agilerr Inc<br>
+      © 2017 Copyright Text
       </div>
     </div>
   </footer>

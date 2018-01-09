@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "@types/jquery": "^3.2.16",
     "angular2-flash-messages": "^1.0.8",
     "angular2-jwt": "^0.2.3",
     "angular2-materialize": "^15.1.10",
@@ -31,6 +32,7 @@
     "ng2-sticky-nav": "^0.1.0",
     "rxjs": "^5.4.2",
     "socket.io-client": "^2.0.3",
+    "types": "^0.1.1",
     "window-scroller": "^1.0.4",
     "zone.js": "^0.8.14"
   },

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashService } from '../../services/dash.service';
+import { AuthService } from '../../services/auth.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import Materialize from 'materialize-css';
 
 @Component({
   selector: 'app-viewsprint',
@@ -14,9 +17,19 @@ export class ViewsprintComponent implements OnInit {
   userStories: any;
   sprint: any;
   date: String;
+  finished: boolean = false;
+  backlogItem: String;
 
-  constructor(private dashService: DashService) {
+  // is member a master
+  isMaster: boolean;
+
+  constructor(
+    private dashService: DashService,
+    private authService: AuthService,
+    private flashMessages: FlashMessagesService
+    ) {
     this.id = localStorage.getItem('currentSprint');
+    this.isMaster = this.authService.isMaster();
   }
 
   ngOnInit() {
@@ -25,9 +38,24 @@ export class ViewsprintComponent implements OnInit {
       this.name = sprint[0].name;
       this.date = sprint[0].date;
       this.ids = sprint[0].ids;
+      this.finished = sprint[0].finished;
       this.userStories = sprint[0].userStories;
+      this.backlogItem = sprint[0].backlogItem;
     }, err => {
       console.log(err);
+    });
+  }
+
+  finishSprint() {
+    this.dashService.finishSprint(this.id).subscribe(data => {
+      if (data.success) {
+        this.finished = true;
+        Materialize.toast('Sprint Marked as Finished!', 4000 , 'light-green');
+        // this.flashMessages.show('Sprint Marked as Finished!', {cssClass: 'alert-success', timeout: 3000})
+      } else {
+        Materialize.toast('Something went wrong!', 4000 , 'red lighten-1');
+        // this.flashMessages.show('Something went wrong!', {cssClass: 'alert-success', timeout: 3000})
+      }
     });
   }
 

@@ -1,32 +1,54 @@
+<div style=" margin-top: 0;padding-bottom: 100px" class="light-green lighten-4">
+<div style="max-width: 80%; margin-left: auto;margin-right: auto">
+  <h3 style="margin-top: 0;padding-top: 5px">Create a New Sprint for {{ projectName }}</h3>
+  <br>
+  <br>
+<div class="input-field col s4">
+  <input id="sn" name="name" [(ngModel)]="sprintName" type="text" class="form-control" style="">
+  <label for="sn">Enter a Title  for Your Sprint</label>
+</div>
 <div>
-  <h3>Create a New Sprint for {{ projectName }}</h3>
-  <hr>
+  <h5>Goes under: </h5>
 
-  <label>Sprint Name: </label>
-  <input name="name" [(ngModel)]="sprintName" type="text" class="form-control" style="width: 250px">
+  <select id="s" class="browser-default in transparent" name="type" [(ngModel)]="backlogItem">
+    <option style="background-color: rgb(31, 37, 35)" value="master" *ngFor="let description of backlogDesriptions" value="{{ description }}">{{ description }}</option>
+  </select>
+
+  <!-- Dropdown Trigger -->
+  <!--<a class='dropdown-button btn' data-activates='dropdown1'>{{ backlogItem }}</a>-->
+  <!-- Dropdown Structure -->
+  <!--<ul id='dropdown1' class='dropdown-content'>
+    <li *ngFor="let description of backlogDesriptions"><a (click)="setBacklogItem(description)">{{ description }}</a></li>
+  </ul>-->
+
+</div>
   <table class="table">
     <thead>
     <tr>
-      <th style="width: 25%">Backlog Id</th>
+      <th style="width: 25%">Sprint Id</th>
       <th>User Stories</th>
     </tr>
     </thead>
     <tbody id="tbody">
-    <tr>
-      <th style="width: 25%" scope="row"><input name="id" ng [(ngModel)]="ids[0]" type="text" class="form-control" style="width: 200px"></th>
-      <td><input name="userstories" [(ngModel)]="userStories[0]" type="text" class="form-control"></td>
+    <tr *ngFor="let count of rows; let i = index">
+      <th style="width: 25%" scope="row"><input name="id" ng [(ngModel)]="ids[i]" type="text" class="form-control" style="width: 200px"></th>
+      <td><input name="userstories" [(ngModel)]="userStories[i]" type="text" class="form-control"></td>
     </tr>
-    <tr>
-      <th style="width: 25%" scope="row"><input name="id" [(ngModel)]="ids[1]" type="text" class="form-control" style="width: 200px"></th>
-      <td><input name="userstories" [(ngModel)]="userStories[1]" type="text" class="form-control"></td>
-    </tr>
-    <tr>
-      <th style="width: 25%" scope="row"><input name="id" [(ngModel)]="ids[2]" type="text" class="form-control" style="width: 200px"></th>
-      <td><input name="userstories" [(ngModel)]="userStories[2]" type="text" class="form-control"></td>
-    </tr>
+    <!--<tr>-->
+      <!--<th style="width: 25%" scope="row"><input name="id" [(ngModel)]="ids[1]" type="text" class="form-control" style="width: 200px"></th>-->
+      <!--<td><input name="userstories" [(ngModel)]="userStories[1]" type="text" class="form-control"></td>-->
+    <!--</tr>-->
+    <!--<tr>-->
+      <!--<th style="width: 25%" scope="row"><input name="id" [(ngModel)]="ids[2]" type="text" class="form-control" style="width: 200px"></th>-->
+      <!--<td><input name="userstories" [(ngModel)]="userStories[2]" type="text" class="form-control"></td>-->
+    <!--</tr>-->
     </tbody>
   </table>
-  <button (click)="createSprint()" class="btn-success" style="float: right">Create Sprint</button>
-  <button routerLink="/dashboard" class="btn-success" style="float: right">Cancel</button>
+  <button (click)="addRows()" class="btn blue lighten-1" style="float: left">[+] Add Rows</button>
+  <button (click)="createSprint()" class="btn light-green" style="float: right">Create Sprint</button>
+  <button routerLink="/sprints" class="btn red lighten-1" style="float: right; margin-right: 15px">Cancel</button>
 
+  <app-chatwrap></app-chatwrap>
+
+</div>
 </div>

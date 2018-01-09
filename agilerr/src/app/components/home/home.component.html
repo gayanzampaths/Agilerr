@@ -16,26 +16,38 @@
 <div class="cyan darken-3 details row">
   <div class="col s6 center" *ngIf="!authService.isLoggedIn()">
       <h5>If you still did not join with us!</h5>
-      <button class="btn waves-effect waves-light light-green accent-3 btn-large cyan pulse" *ngIf="!authService.isLoggedIn()" routerLink="register">Sign Up
+      <button class="btn waves-effect waves-light green accent-4 btn-large cyan pulse" *ngIf="!authService.isLoggedIn()" routerLink="register">Sign Up
         <i class="material-icons right">send</i>
       </button>
       <h6>It's Free!</h6>
   </div>
   <div class="col s6 center" *ngIf="!authService.isLoggedIn()">
       <h5>Your Projects are waiting!</h5>
-      <button class="btn waves-effect waves-light lime accent-3 btn-large cyan pulse" routerLink="login">Sign In
+      <button class="btn waves-effect waves-light green accent-4 btn-large cyan pulse" routerLink="login">Sign In
         <i class="material-icons right">send</i>
       </button>
       <h6>Manage them.</h6>
   </div>
   <div class="col s12 center" *ngIf="authService.isLoggedIn()">
     <h5>Visit Your Projects.</h5>
-    <button class="btn waves-effect waves-light lime accent-3 btn-large cyan pulse" routerLink="dashboard">Go to Dashboard
+    <button class="btn waves-effect waves-light green accent-4 btn-large cyan pulse" routerLink="dashboard">Go to Dashboard
         <i class="material-icons right">send</i>
     </button>
     <h6>Manage Them.</h6>
   </div>
+  <div style="max-width: 80%; margin-left: auto; margin-right: auto">
+  <div class="col s6 center card-panel teal lighten-2">
+    <h3>Total Projects Hosted</h3>
+    <h4 style="text-align: center">{{projectsCount}}</h4>
+  </div>
+  <div class="col s6 center card-panel teal lighten-2">
+    <h3>Total Registered Users</h3>
+    <h4 style="text-align: center">{{usersCount}}</h4>
+  </div>
 </div>
+</div>
+
+<app-chatwrap></app-chatwrap>
 
 <div class="">
   <div class="row teal lighten-2" style="margin-bottom: 0;">

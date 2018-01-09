@@ -15,24 +15,29 @@
                     <label style="color:white;font-size: 20px;" for="name">Enter Your Name</label>
                 </div>
                 <div class="input-field">
-                    <input style="color:white;font-size: 20px;" id="username" type="text" class="validate in" [(ngModel)]="username" name="username">
+                    <input style="color:white;font-size: 20px;" id="username" type="text" class="validate in" [(ngModel)]="username" name="username" (keyup)="checkUsername()">
                     <label style="color:white;font-size: 20px;" for="username">Enter Username For Your Account</label>
+                    <span id="useravailable" [(hidden)]="!showUsernameSpan" *ngIf="isUsernameAvailable" style="color: green">Username Available!</span>
+                    <span id="usernotavailable" [(hidden)]="!showUsernameSpan" *ngIf="!isUsernameAvailable" style="color: red">Username is not Available!</span>
                 </div>
                 <div class="input-field">
-                    <input style="color:white;font-size: 20px;" id="email" type="email" class="validate in" [(ngModel)]="email" name="email">
+                    <input style="color:white;font-size: 20px;" id="email" type="email" class="validate in" [(ngModel)]="email" name="email" (keyup)="checkEmail()">
                     <label style="color:white;font-size: 20px;" for="email">Enter Your E-Mail</label>
+                    <span [(hidden)]="!showEmailSpan" *ngIf="isEmailAvailable" style="color: green">Email Available!</span>
+                    <span [(hidden)]="!showEmailSpan" *ngIf="!isEmailAvailable" style="color: red">Email is not Available!</span>
+                    <span [(hidden)]="!showEmailNotValidSpan" *ngIf="!isEmailValid" style="color: red">Email Not Valid!</span>
                 </div>
                 <div class="input-field">
                     <input style="color:white;font-size: 20px;" id="name" type="password" class="validate in" [(ngModel)]="password" name="password">
                     <label style="color:white;font-size: 20px;" for="name">Create Password For Your Account</label>
                 </div>
-                <label>Select Your Role</label>
-                <select class="browser-default in transparent" [(ngModel)]="type" name="type">
-                  <option value="master">I am a scrum master</option>
-                  <option value="member">I am a surm member</option>
+                <h6 style="color:white;font-size: 20px;">My Role :</h6>
+                <select id="s" class="browser-default in transparent" [(ngModel)]="type" name="type">
+                  <option style="background-color: rgb(31, 37, 35)" value="master">I am a scrum master</option>
+                  <option style="background-color: rgb(31, 37, 35)" value="member">I am a surm member</option>
                 </select>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Submit">
+                <input [disabled]="!(isUsernameAvailable && isEmailAvailable && isEmailValid)" type="submit" class="btn btn-primary" value="Submit">
               </div>
           </form>
           <div class="col s6 center">
@@ -48,7 +53,6 @@
             terms of service and privacy policy.</p>
       </div>
 </div>
-
 
 <!--
       <input type="text" [(ngModel)]="name" class="form-control" name="name">

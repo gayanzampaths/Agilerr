@@ -20,8 +20,12 @@ export class CreatesprintComponent implements OnInit {
   storyCount = 0;
   formattedDate: String;
   projectName: String;
+  backlogItem: String = 'Select Backlog Item';
+  backlogDesriptions = new Array();
 
   sprint = {};
+
+  rows = [1, 2, 3];
 
   constructor(
     private dashService: DashService,
@@ -30,38 +34,13 @@ export class CreatesprintComponent implements OnInit {
   ) {
     this.projectId = localStorage.getItem('currentProject');
     this.projectName = localStorage.getItem('projectName');
+
+    this.dashService.loadProject().subscribe(project => {
+      this.backlogDesriptions = project.project[0].description;
+    });
   }
 
   ngOnInit() {
-  }
-
-  createNewFields() {
-
-    // var input1 = document.createElement('input');
-    // input1.setAttribute('type', 'text');
-    // input1.setAttribute('class', 'form-control');
-    // input1.setAttribute('style', 'width: 200px');
-    //
-    // var th = document.createElement('th');
-    // th.setAttribute('style', 'width: 25%');
-    // th.setAttribute('scope', 'row');
-    //
-    // th.appendChild(input1);
-    //
-    // var input2 = document.createElement('input');
-    // input2.setAttribute('type', 'text');
-    // input2.setAttribute('class', 'form-control');
-    // input2.setAttribute('(focus)', 'createNewFields()');
-    //
-    // var td = document.createElement('td');
-    // td.appendChild(input2);
-    //
-    // var tr = document.createElement('tr');
-    // tr.appendChild(th);
-    // tr.appendChild(td);
-    //
-    // document.getElementById('tbody').appendChild(tr);
-
   }
 
   createSprint() {
@@ -69,13 +48,14 @@ export class CreatesprintComponent implements OnInit {
     this.sprint['ids'] = this.ids;
     this.sprint['userStories'] = this.userStories;
     this.sprint['name'] = this.sprintName;
+    this.sprint['backlogItem'] = this.backlogItem;
 
     this.getFormattedDate();
     this.sprint['date'] = this.formattedDate;
 
     this.dashService.createSprint(this.sprint).subscribe(data => {
       this.flashMessage.show('Your sprint created successfully!', {cssClass: 'alert-success', timeout: 3000});
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/sprints']);
     }, err => {
       this.flashMessage.show('Somethin went wrong!', {cssClass: 'alert-danger', timeout: 3000});
       this.router.navigate(['/createSprint']);
@@ -84,7 +64,20 @@ export class CreatesprintComponent implements OnInit {
 
   getFormattedDate() {
     var d = new Date();
-    this.formattedDate = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    this.formattedDate = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  }
+
+  // Add Rows to table
+  addRows() {
+
+    let index = this.rows[this.rows.length - 1];
+    this.rows.push(++index);
+
+  }
+
+  setBacklogItem(item) {
+    this.backlogItem = item;
+    console.log(this.backlogItem);
   }
 
 }
